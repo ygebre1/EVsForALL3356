@@ -1,12 +1,47 @@
-import React from 'react';
-import Menubar from '../sections/Menubar.js';
+import React, { useState } from 'react';
+import '../styles/Homepage.css';
 import Tesla from '../images/tesla.jpeg';
+import profpic from '../images/profpic.png' ;
+import logo from '../images/EVS FOR ALL.png';
 import {Link, NavLink} from 'react-router-dom';
 
-export default function Homepage() {
+export default function HomePage() {
+    const [isDropdownVisible, setDropdownVisibility] = useState(false);
+
+    // Function to toggle the visibility of the dropdown menu
+    const toggleDropdown = () => {
+      setDropdownVisibility(!isDropdownVisible);
+    };
     return (
         <div>
-            <Menubar />
+            <div id = "menubar">
+            <Link to = "/" title = "EVs for All Website">
+                <img src={logo} alt="EVs for All Website" />
+            </Link>
+            <nav id = "homenav">
+                <a className = "navlinks" href='/HomePage'>Home</a>
+                <a className = "navlinks" href='/Buy'>Buy EVs</a>
+                <a className = "navlinks">Rent EVs</a>
+                <a className = "navlinks">Lease EVs</a>
+                <a className = "navlinks">Find EV Charging Stations</a>
+                <a className = "navlinks">More Information</a>
+            </nav>
+            <div id="profileImage" onClick={toggleDropdown}>
+                <img src={profpic} alt="Profile" />
+
+                {/* Dropdown menu */}
+                {isDropdownVisible && (
+                    <div className="dropdown-menu">
+                    <ul>
+                        <li><NavLink to="/profile-settings">Profile Settings</NavLink></li>
+                        <li><NavLink to="/location-settings">Location Settings</NavLink></li>
+                        <li><NavLink to="/preferences">Preferences</NavLink></li>
+                        <li><NavLink to="/help">Help</NavLink></li>
+                    </ul>
+                    </div>
+                )}
+            </div>
+            </div>
             <div id = "homeInfo">
                 <div id = "textinfo">
                     <h2 id = "trustedCar">The Most Trusted Car Service in America</h2>

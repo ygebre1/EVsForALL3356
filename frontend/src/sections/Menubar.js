@@ -5,11 +5,11 @@ import {Link, NavLink} from 'react-router-dom';
 export default function Menubar() {
     return (
         <div id = "menubar">
-            <Link to = "" title = "EVs for All Website">
+            <Link to = "/" title = "EVs for All Website">
                 <img src={logo} alt="EVs for All Website" />
             </Link>
             <nav id = "homenav">
-                <a className = "navlinks">Home</a>
+                <a className = "navlinks" href='/'>Home</a>
                 <a className = "navlinks">Buy EVs</a>
                 <a className = "navlinks">Rent EVs</a>
                 <a className = "navlinks">Lease EVs</a>
