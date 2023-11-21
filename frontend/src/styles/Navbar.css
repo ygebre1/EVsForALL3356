@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000; /* Adjust the background color as needed */
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .navbar-logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px; /* Adjust spacing as needed */
+    font-weight: bold;
+  }
+  
+  .navbar-links a:hover {
+    color: #ccc; /* Adjust hover color as needed */
+  }
+  
+  .navbar-buttons button {
+    padding: 10px 20px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style for Sign Up button */
+  .navbar-buttons button.sign-up {
+    background-color: green; /* Use a color picker to match your green */
+  }
+  
+  /* Style for Login button */
+  .navbar-buttons button.log-in {
+    background-color: orange; /* Use a color picker to match your orange */
+  }
+  
+  /* You might need to adjust the colors to match the exact shades from your logo */
+  

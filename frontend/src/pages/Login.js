@@ -28,7 +28,7 @@ function Login() {
       alert("Success");
 
       //edit here to new page if successfully logins 99999
-      navigate("/");
+      navigate("/buy");
 
     } catch (err) {
       console.log(err);
