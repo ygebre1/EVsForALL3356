@@ -1,38 +1,72 @@
-.preferences-container {
-    display: flex;
-    height: 100vh; /* Full height of the viewport */
+/* Car.css */
+.buy-page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.car {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.car img {
+  max-width: 80%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.car h2 {
+  color: #333;
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.car .price {
+  color: #27ae60;
+  font-size: 1.8em;
+  margin: 10px 0;
+}
+
+.car .buy-now {
+  background-color: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.car .starred {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  color: #ffd700;
+}
+
+.car .starred:not(.starred) {
+  color: #ccc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .car {
+    margin: 10px;
   }
+}
   
-  .preferences-navbar {
-    background-color: black;
-    width: 200px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 100%; /* Fill the entire height */
-  }
-  
-  .preferences-navlink {
-    color: white;
-    text-decoration: none;
-    padding: 12px; /* Adjust the padding as needed */
-    font-size: 16px;
-    margin-bottom: 75px; /* Adjust the margin between nav links as needed */
-  }
-  
-  .preferences-navlink:hover {
-    background-color: #00FF00; /* Green hover color */
-  }
-  
-  .active-navlink {
-    background-color: #00FF00; /* Green active color */
-  }
-  
-  .preferences-content {
-    padding: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.preferences-content {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}

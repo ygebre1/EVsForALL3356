@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate} from 'react-router-dom';
 import '../styles/Login.css';
 import logo from '../images/EVS FOR ALL.png';
-import { useState } from "react";
 import axios from "axios";
+import { useUser } from '../functions/userContext.js';
 
 function Login() {
 
   //stores input field information, passes to backend
   const [user, setUser] = useState({
-    username: null,
-    password: null
+    username: '',
+    password: ''
   });
 
   const navigate = useNavigate();
+  const { login } = useUser(); // Destructure the login function from useUser
 
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -23,21 +24,15 @@ function Login() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8800/logins", user);
-      console.log(response);
-      alert("Success");
-
-      //edit here to new page if successfully logins 99999
+      const response = await axios.post("http://localhost:8800/login", user);
+      login(response.data.token); // Use the login function from the user context
+      alert("Login successful");
       navigate("/Homepage");
-
     } catch (err) {
       console.log(err);
-      // Check if the error response has a status code of 409 which indicates username exists
       alert("Incorrect login details");
     }
   };
-
-
 
 
     return (

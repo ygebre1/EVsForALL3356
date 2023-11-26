@@ -2,15 +2,15 @@ import express from "express";
 import sqlite3 from "sqlite3";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Change the database connection to SQLite
-const db = new sqlite3.Database("./database.sqlite"); // or use a file path to persist data
+// Set up SQLite database
+const db = new sqlite3.Database("./Evsforall.sqlite");
 
-// Create the userinfo table if it doesn't exist
 db.run(`
   CREATE TABLE IF NOT EXISTS userinfo (
     username TEXT PRIMARY KEY NOT NULL,
@@ -19,11 +19,70 @@ db.run(`
 `);
 
 
-app.get("/", (req, res) => {
-  res.json("hello");
+db.run(`
+  CREATE TABLE IF NOT EXISTS starred_vehicles (
+    username TEXT NOT NULL,
+    vehicle_id TEXT NOT NULL,
+    price Integer,
+    PRIMARY KEY (username, vehicle_id),
+    FOREIGN KEY (username) REFERENCES userinfo(username)
+  )
+`);
+
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS vehicle_info (
+    vehicle_id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    price Integer,
+    image_url TEXT,
+    Capacity INTEGER
+    )
+`) ;
+
+
+// JWT Secret Key
+const JWT_SECRET = 'test'; // Replace with your actual secret key
+
+// Signup route
+app.post("/signup", async (req, res) => {
+  const { username, password } = req.body;
+  
+  if (!username || !password) {
+    return res.status(400).send("Username and password are required");
+  }
+
+  // Check if the username already exists
+  const checkIfExist = "SELECT * FROM userinfo WHERE username = ?";
+  db.get(checkIfExist, [username], async (err, row) => {
+    if (err) {
+      return res.status(500).send("Error checking username");
+    }
+
+    if (row) {
+      return res.status(409).send("Username already exists");
+    }
+
+    // Hash the password
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Insert new user into the database
+      const insert = "INSERT INTO userinfo (username, password) VALUES (?, ?)";
+      db.run(insert, [username, hashedPassword], (insertErr) => {
+        if (insertErr) {
+          return res.status(500).send("Error creating new user");
+        }
+        res.status(201).send("User created successfully");
+      });
+    } catch (hashError) {
+      res.status(500).send("Error hashing password");
+    }
+  });
 });
 
-app.post("/logins", (req, res) => {
+// Login route with JWT
+app.post("/login", (req, res) => {
   const checkIfExist = "SELECT * FROM userinfo WHERE username = ?";
   db.get(checkIfExist, [req.body.username], (err, data) => {
     if (err) {
@@ -34,58 +93,105 @@ app.post("/logins", (req, res) => {
     if (data) {
       const storedPassword = data.password;
       bcrypt.compare(req.body.password, storedPassword, (bcryptErr, result) => {
-        if (bcryptErr) {
-          console.error("Bcrypt error:", bcryptErr);
-          return res.status(500).send("An error occurred during login.");
-        }
-
         if (result) {
-          return res.status(200).send("Login successful.");
+          const token = jwt.sign({ username: req.body.username }, JWT_SECRET, {
+            expiresIn: '24h'
+          });
+          res.json({ token: token });
         } else {
-          return res.status(401).send("Incorrect username or password.");
+          res.status(401).send("Invalid credentials");
         }
       });
     } else {
-      return res.status(401).send("Incorrect username or password.");
+      res.status(404).send("Username not found");
     }
   });
 });
 
-app.post("/signup", (req, res) => {
-  const checkIfExist = "SELECT * FROM userinfo WHERE username = ?";
-  db.get(checkIfExist, [req.body.username], (err, data) => {
+// Middleware to authenticate JWT
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).send("Access Denied");
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) {
-      console.error("SQLite error:", err);
-      return res.status(500).send("An error occurred while checking the username.");
+      return res.status(403).send("Invalid Token");
     }
+    req.user = user;
+    next();
+  });
+};
 
-    if (data) {
-      console.log("Username already exists");
-      return res.status(409).send("Username already exists.");
+// Star a vehicle route
+app.post("/star-vehicle", authenticateToken, (req, res) => {
+  const { vehicle_id } = req.body;
+  const username = req.user.username;
+  const { price } = req.body;
+  const insert = "INSERT INTO starred_vehicles (username, vehicle_id,price) VALUES (?, ?, ?)";
+  console.log("Price " + price);
+  db.run(insert, [username, vehicle_id, price], (err) => {
+    if (err) {
+      return res.status(500).send("Error starring the vehicle");
     }
-
-    bcrypt.hash(req.body.password, 10, (hashErr, hashedPassword) => {
-      if (hashErr) {
-        console.error("Bcrypt hash error:", hashErr);
-        return res.status(500).send("An error occurred during signup.");
-      }
-
-      const insertUser = "INSERT INTO userinfo(username, password) VALUES (?, ?)";
-      const values = [req.body.username, hashedPassword];
-
-      db.run(insertUser, values, function (insertErr) {
-        if (insertErr) {
-          console.error("SQLite error on insert:", insertErr);
-          return res.status(500).send("An error occurred during the signup process.");
-        }
-
-        // Send back a success response with the inserted user's ID
-        return res.status(201).json({ success: true, data: { id: this.lastID } });
-      });
-    });
+    res.status(200).send("Vehicle starred successfully");
   });
 });
 
-app.listen(8800, () => {
-  console.log("Connected to backend.");
+// Unstar a vehicle route
+app.post("/is-starred", authenticateToken, (req, res) => {
+  const { vehicle_id } = req.body;
+  const username = req.user.username;
+    const query = "SELECT COUNT(*) AS cnt FROM starred_vehicles WHERE username = '" + username + "' AND vehicle_id = '" + vehicle_id + "'" ;
+//    console.log(query)
+    db.get(query, (err, row) => {  
+//      console.log('vehicle_id : ' + vehicle_id + ' count : ' + row.cnt  + ' err : ' + err)
+    if (err) {
+      return res.status(500).send("Error getting the status");
+    }else {
+      // If count is greater than 0, the record exists
+      if (row.cnt > 0) {
+          res.send(true);
+      } else {
+          res.send(false);
+      }
+  }
+  });
+});
+
+// Unstar a vehicle route
+app.delete("/unstar-vehicle", authenticateToken, (req, res) => {
+  const { vehicle_id } = req.body;
+  const username = req.user.username;
+  const del = "DELETE FROM starred_vehicles WHERE username = ? AND vehicle_id = ?";
+  db.run(del, [username, vehicle_id], (err) => {
+    if (err) {
+      return res.status(500).send("Error unstarring the vehicle");
+    }
+    res.status(200).send("Vehicle unstarred successfully");
+  });
+}); // This was missing
+
+// Get all starred vehicles for a user
+app.get("/user-stars", authenticateToken, (req, res) => {
+  const username = req.user.username;
+  const query = `
+    SELECT vi.*
+    FROM starred_vehicles sv
+    JOIN vehicle_info vi ON sv.vehicle_id = vi.vehicle_id
+    WHERE sv.username = ?`;
+  db.all(query, [username], (err, rows) => {
+    if (err) {
+      return res.status(500).send("Error fetching starred vehicles");
+    }
+    res.status(200).json(rows);
+  });
+});
+
+const port = 8800;
+app.listen(port, () => {
+  console.log(`Connected to backend`);
 });
