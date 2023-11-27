@@ -14,10 +14,10 @@
 - Implementation of bcrypt for password hashing.
 - Use of JWT (JSON Web Tokens) for authorization.
 
-## Saving User Preferences Page
+## Saving User Preferences on Buy Page
 
 ### Frontend
-- Allows user to star vehicles on a Buy, Rent, or Lease page to save the user's preference for a vehicle (For now we will hard code some vehicles on these pages as we want the focus to be on implementing functionality for saving preferences).
+- Allows user to star vehicles on the Buy page to save the user's preference for a vehicle (For now we will hard code some vehicles on these pages as we want the focus to be on implementing functionality for saving preferences).
 - Event listeners to capture and process user changes to their preferences.
 - Logic to send user preference updates to the backend.
 
