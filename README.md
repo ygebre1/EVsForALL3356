@@ -18,4 +18,4 @@ EV's For All is a one stop shop for everything related to Electric Cars. The pri
 - Stock Photos: We have to remove stock photos on buy page
 - Non-functional pages: We are planning on combining the buy, rent, and lease pages into one vehicles page to simplify UI and make website more functional
 - Messy UI: Improving UI further and getting around to finishing implementation for vehicles page
-- Authentication Bug: A bug with authentication has to be fixed for the next iteration. This should actually being fixed in next few days.
+- Authentication Bug: A bug with authentication has to be fixed for the next iteration. This should actually being fixed in the next few days.
