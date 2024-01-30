@@ -42,4 +42,33 @@
   }
   
   /* You might need to adjust the colors to match the exact shades from your logo */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   
+    .navbar-logo {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .navbar-links {
+      margin-bottom: 20px;
+    }
+  
+    .navbar-links a {
+      margin-right: 0;
+    }
+  
+    .navbar-buttons {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
+  
+    .navbar-buttons button {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  }
