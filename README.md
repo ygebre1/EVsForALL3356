@@ -1,41 +1,21 @@
 # EVsForALL
 
-## Login Page
+##About
+EV's For All is a one stop shop for everything related to Electric Cars. The primary goal of the application is close the gap present in EV adoption for under priveledged communities. We seek to encourage and empower our users, especially people from underpriveledged communities, to obtain EVs as well as educate them on the benefits of electric vehicles.
 
-### Frontend
-- User Interface (UI) for the login form, including input fields for username and password.
-- Event listeners to capture user input (e.g., when they submit the form).
-- Error handling to display messages for successful or failed login attempts.
+# Release Notes
+----------------------------------------
+## Version 0.1.0
 
-### Backend
-- An authentication system to verify user credentials, usually involving database queries to match the username and password.
-- Response handling to send back authentication results to the frontend.
-- Basic security measures to protect against unauthorized access (Hashing and Salting).
-- Implementation of bcrypt for password hashing.
-- Use of JWT (JSON Web Tokens) for authorization.
+### Features
+- Enhanced Navbar: Navbar is now responsive on pages that it present on.
+- Added Mobile compatibility for navbar component: Navbar can now also be viewed on mobile device not just laptop or desktop
 
-## Saving User Preferences on Buy Page
+### Bug Fixes
+None this time around
 
-### Frontend
-- Allows user to star vehicles on the Buy page to save the user's preference for a vehicle (For now we will hard code some vehicles on these pages as we want the focus to be on implementing functionality for saving preferences).
-- Event listeners to capture and process user changes to their preferences.
-- Logic to send user preference updates to the backend.
-
-### Backend
-- Database storage to save and retrieve user preferences.
-- Basic security measures to ensure the integrity of stored preferences.
-- Backend code using Node.js and Express.js to handle the insertion, updating, retrieval, and deletion of user preferences.
-
-## Preferences Display Page
-
-### Frontend
-- UI that displays cars that were starred by the user on the Buy page. (Note: The filtering option has been removed from this page.)
-- Client-side logic to display the user's preferred cars.
-
-### Backend
-- Database operations using SQLite to manage user preferences.
-- Backend code in Node.js and Express.js to handle database interactions.
-
-## Rationale for Artifact Selection
-We chose to implement this artifact as it had a good balance between frontend and backend components, which would provide a comprehensive understanding of what we need to include in our actual implementation. This feature will also be beneficial for users, as they can easily browse through a preferred list of EVs rather than a larger, more general list. 
-
+### Known Issues
+- [Issue 1]: We have to remove stock photos on buy page
+- [Issue 2]: We are planning on combining the buy, rent, and lease pages into one vehicles page to simplify UI and make website more functional
+- [Issue 3]: Improving UI further and getting around to finishing implementation for vehicles page
+- [Bug 1]: A bug with authentication has to be fixed for the next iteration. This should actually being fixed in next few days.
