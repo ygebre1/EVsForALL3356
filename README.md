@@ -1,6 +1,6 @@
 # EVsForALL
 
-##About
+## About
 EV's For All is a one stop shop for everything related to Electric Cars. The primary goal of the application is close the gap present in EV adoption for under priveledged communities. We seek to encourage and empower our users, especially people from underpriveledged communities, to obtain EVs as well as educate them on the benefits of electric vehicles.
 
 # Release Notes
