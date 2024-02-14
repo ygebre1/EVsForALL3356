@@ -3,8 +3,10 @@ import { useUser } from '../functions/userContext';
 import '../styles/Buy.css';
 import car1 from '../images/carpic1.jpeg';
 import Authenticatednavjs from '../sections/Authenticatednav.js';
-
+import Search from '../sections/LocationSearchBar.js'
 import '../styles/Car.css';
+import Dropdown from '../sections/SortMenu.js';
+import Filter from '../sections/FilterMenu.js';
 
 function Car({ id, name, price, image, mpg, capacity,  onStar, onUnstar }) {
   const [starred, setStarred] = useState(null); // State to store the fetched data
@@ -115,9 +117,36 @@ const Buy = () => {
   //  fetchStarredVehicles();
   };
 
+  const sortMenuItems = [
+    { title: 'Default (Sort by)'},
+    { title: 'Price (lowest to highest)'},
+    { title: 'Price (highest to lowest)'},
+    { title: 'Alphabetically (A-Z)'}
+  ];
+
+  const [changer, setChanger] = useState("Default (Sort by)")
+
   return (
     <div>
-       <Authenticatednavjs />
+      <Authenticatednavjs />
+      <div className = "flexbox">
+        <Search/>
+        <div>
+          <Dropdown
+            items={sortMenuItems}
+            dropdown = "dropdown-content"
+            buttonClass = "dropbtn"
+            buttonTrigger={changer}
+            changer={setChanger}
+          />
+          <Filter
+            dropdown = "dropdown-content"
+            buttonClass = "dropbtn"
+            buttonTrigger="Default (Filter by)"
+          />
+        </div>
+      </div>
+      
       <div className="buy-page">
         {cars.map((car) => (
           <Car

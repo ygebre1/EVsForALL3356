@@ -1,0 +1,18 @@
+.location-input {
+    padding: 10px 20px;
+    width: 500px;
+}
+#loc-form {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+#loc-button {
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+#loc-button:hover {
+    cursor: pointer;
+}
