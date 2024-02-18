@@ -1,8 +1,7 @@
 import express from "express";
 import sqlite3 from "sqlite3";
 import cors from "cors";
-import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
+import fetch from 'node-fetch'; // Import node-fetch
 
 const app = express();
 app.use(cors());
@@ -10,6 +9,7 @@ app.use(express.json());
 
 // Set up SQLite database
 const db = new sqlite3.Database("./Evsforall.sqlite");
+const response = await fetch('https://github.com/');
 
 db.run(`
   CREATE TABLE IF NOT EXISTS userinfo (
@@ -40,6 +40,56 @@ db.run(`
     )
 `) ;
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS light_duty_automobiles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        manufacturer_name TEXT,
+        model TEXT,
+        model_year INTEGER,
+        photo_url TEXT,
+        electric_range INTEGER,
+        fuel_name TEXT,
+        drivetrain TEXT,
+        seating_capacity INTEGER
+    )
+`);
+
+const fetchAndStoreAutomobiles = async () => {
+  try {
+      const response = await fetch('https://developer.nrel.gov/api/vehicles/v1/light_duty_automobiles.json?api_key=5TsXfcxZpGRkQCkPjzgxICGsbWZ4jqvH2ge3i9d6', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+      const data = await response.json();
+      //console.log(data);
+
+      // Insert each automobile into the database
+      for (let i = 0; i < data.result.length; i++) {
+        let auto = data.result[i];
+        db.run(`INSERT INTO light_duty_automobiles (manufacturer_name, model, model_year, photo_url, electric_range, fuel_name, drivetrain, seating_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
+        [auto.manufacturer_name, auto.model, auto.model_year, auto.photo_url, auto.electric_range, auto.fuel_name, auto.drivetrain, auto.seating_capacity]);
+      }
+
+  } catch (error) {
+      console.error('Error:', error);
+  }
+};
+
+fetchAndStoreAutomobiles();
+
+// Route to get all light-duty automobiles
+app.get("/light-duty-automobiles", (req, res) => {
+  db.all("SELECT * FROM light_duty_automobiles", [], (err, rows) => {
+      if (err) {
+          res.status(500).send("Error retrieving data from the database");
+          console.error(err.message);
+      } else {
+          res.status(200).json(rows);
+      }
+  });
+});
 
 // JWT Secret Key
 const JWT_SECRET = 'test'; // Replace with your actual secret key
