@@ -56,7 +56,7 @@ db.run(`
 
 const fetchAndStoreAutomobiles = async () => {
   try {
-      const response = await fetch('https://developer.nrel.gov/api/vehicles/v1/light_duty_automobiles.json?api_key=5TsXfcxZpGRkQCkPjzgxICGsbWZ4jqvH2ge3i9d6', {
+      const response = await fetch('https://developer.nrel.gov/api/vehicles/v1/light_duty_automobiles.json?api_key=MYAPIKEY', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json'
