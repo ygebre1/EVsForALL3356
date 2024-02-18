@@ -31,16 +31,6 @@ db.run(`
 
 
 db.run(`
-  CREATE TABLE IF NOT EXISTS vehicle_info (
-    vehicle_id TEXT PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL,
-    price Integer,
-    image_url TEXT,
-    Capacity INTEGER
-    )
-`) ;
-
-db.run(`
     CREATE TABLE IF NOT EXISTS light_duty_automobiles (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         manufacturer_name TEXT,
@@ -56,18 +46,23 @@ db.run(`
 
 const fetchAndStoreAutomobiles = async () => {
   try {
-      const response = await fetch('https://developer.nrel.gov/api/vehicles/v1/light_duty_automobiles.json?api_key=MYAPIKEY', {
+      // IMPORTANT!!!! replace key = "" in the URL with your signed up API key
+      const response = await fetch('https://developer.nrel.gov/api/vehicles/v1/light_duty_automobiles.json?api_key=kG6bLOoiUrgIbpeq9QQZAwILzFcY5o4MasVhd218', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json'
           }
       });
       const data = await response.json();
-      //console.log(data);
+      console.log(data);
+
+      //data is an array of car objects, each car object has many attributes, we only need the below attributes
+      // manufacturer_name, model, model_year, photo_url, electric_range, fuel_name, drivetrain, seating_capacity
 
       // Insert each automobile into the database
       for (let i = 0; i < data.result.length; i++) {
         let auto = data.result[i];
+        
         db.run(`INSERT INTO light_duty_automobiles (manufacturer_name, model, model_year, photo_url, electric_range, fuel_name, drivetrain, seating_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
         [auto.manufacturer_name, auto.model, auto.model_year, auto.photo_url, auto.electric_range, auto.fuel_name, auto.drivetrain, auto.seating_capacity]);
       }
@@ -80,8 +75,9 @@ const fetchAndStoreAutomobiles = async () => {
 fetchAndStoreAutomobiles();
 
 // Route to get all light-duty automobiles
+// LIMIT 30 clause limits the number of cars fetched, for testing purposes, limiting to 30 for now
 app.get("/light-duty-automobiles", (req, res) => {
-  db.all("SELECT * FROM light_duty_automobiles", [], (err, rows) => {
+  db.all("SELECT * FROM light_duty_automobiles LIMIT 30", [], (err, rows) => {
       if (err) {
           res.status(500).send("Error retrieving data from the database");
           console.error(err.message);
@@ -90,6 +86,7 @@ app.get("/light-duty-automobiles", (req, res) => {
       }
   });
 });
+
 
 // JWT Secret Key
 const JWT_SECRET = 'test'; // Replace with your actual secret key
@@ -228,11 +225,13 @@ app.delete("/unstar-vehicle", authenticateToken, (req, res) => {
 // Get all starred vehicles for a user
 app.get("/user-stars", authenticateToken, (req, res) => {
   const username = req.user.username;
+
   const query = `
     SELECT vi.*
     FROM starred_vehicles sv
-    JOIN vehicle_info vi ON sv.vehicle_id = vi.vehicle_id
+    JOIN light_duty_automobiles vi ON sv.vehicle_id = vi.id
     WHERE sv.username = ?`;
+
   db.all(query, [username], (err, rows) => {
     if (err) {
       return res.status(500).send("Error fetching starred vehicles");
