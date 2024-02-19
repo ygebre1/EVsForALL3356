@@ -1,7 +1,6 @@
 import React from 'react';
 import Menubar from '../sections/Menubar.js';
 import Tesla from '../images/tesla.jpeg';
-import {Link, NavLink} from 'react-router-dom';
 
 export default function Homepage() {
     return (
@@ -18,12 +17,6 @@ export default function Homepage() {
                         efficient. Already an EV owner? That's fine, locate charging stations near you
                         for quick and easy charging!
                     </p>
-                    <div className = "buttonLink">
-                        <NavLink className = "buttonText" to = "/login">Find Charging Stations Near Me</NavLink>
-                    </div>
-                    <div className = "buttonLink">
-                        <NavLink className = "buttonText" to = "/login">Buy, Rent, or Lease EVs</NavLink>
-                    </div>
                 </div>
                 <img id = "tesla" src = {Tesla} alt = "The Future of EVs: Tesla"/>
             </div>
