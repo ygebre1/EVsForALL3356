@@ -2,7 +2,6 @@
   background-color: black;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   padding: 20px 0 20px 20px;
 }
 .navlinks {
@@ -14,24 +13,7 @@
   cursor: pointer;
   color: rgb(20, 175, 20);
 }
-#signupDiv, #loginDiv {
-  padding: 15px 40px;
-  background-color: rgb(9, 117, 9);
-  margin-bottom: 10px;
-}
-#signupDiv {
-  background-color: rgb(9, 117, 9);
-  margin-left: 20px;
-}
-#loginDiv {
-  background-color: rgb(222, 148, 10);
-  margin-left: 40px;
-}
-#signUpButton, #loginbutton {
-  font-size: 24px;
-  text-decoration: none;
-  color: white;
-}
+
 #navbuttons {
   display: flex;
   flex-direction: column;
