@@ -78,12 +78,16 @@ const MapComponent = ({ title }) => {
     }
   }, [mapCenter]);
 
+  console.log(process.env.MAPS_API_KEY + "hello")
+
   return (
     <div>
       <Menubar />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
         <h2>{title}</h2>
-        <LoadScript googleMapsApiKey="INSERT_API_KEY_HERE" libraries={libraries}>
+        {/* Please do not change the following line. Use this command $env:REACT_APP_GOOGLE_MAPS_API_KEY = "your_api_key_here"; npm start
+when doing npm start to use API KEY, this way noboby accidently pushes the key into our repo. */}
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
         <div style={{ marginBottom: '20px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
                 <input
