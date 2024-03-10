@@ -3,8 +3,8 @@ import { GoogleMap, LoadScript, Marker, StandaloneSearchBox, InfoWindow } from '
 import Menubar from '../sections/Menubar.js';
 
 const mapContainerStyle = {
-  height: '600px',
-  width: '100%',
+  height: '650px',
+  width: '90%',
 };
 
 const center = {
