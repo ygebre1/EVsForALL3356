@@ -1,6 +1,6 @@
 import React from 'react';
 import Menubar from '../sections/Menubar.js';
-import Tesla from '../images/tesla.jpeg';
+import NissanLeaf from '../images/nissanLeaf.jpg';
 
 export default function Homepage() {
     return (
@@ -18,7 +18,7 @@ export default function Homepage() {
                         for quick and easy charging!
                     </p>
                 </div>
-                <img id = "tesla" src = {Tesla} alt = "The Future of EVs: Tesla"/>
+                <img id="nissanLeaf" src={NissanLeaf} alt="The Future of EVs: Nissan Leaf"/> {/* Replaced Tesla with Nissan Leaf */}
             </div>
             
         </div>
