@@ -121,7 +121,7 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
                 fontSize: '16px',
                 cursor: 'pointer',
             }}>
-                Find Charging Stations
+                Locate Me
             </button>
             </div>
 
