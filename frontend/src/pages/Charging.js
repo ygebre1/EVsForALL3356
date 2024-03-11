@@ -41,6 +41,7 @@ const MapComponent = ({ title }) => {
     }
   };
 
+  //fetches EV stations and traditional charging stations, will filter it to display only EV stations in the future
   const fetchEVChargingStations = (map, center) => {
     const service = new window.google.maps.places.PlacesService(map);
     const request = {
