@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo} from 'react';
 import '../styles/Buy.css';
-import Authenticatednavjs from '../sections/Authenticatednav.js';
+import Menubar from '../sections/Menubar.js';
 import Search from '../sections/LocationSearchBar.js'
 import '../styles/Car.css';
 import Dropdown from '../sections/SortMenu.js';
@@ -106,7 +106,7 @@ const Buy = () => {
 
   return (
     <div>
-      <Authenticatednavjs />
+      <Menubar />
       <div className="flexbox">
         <Search />
         <div>
