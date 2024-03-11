@@ -4,8 +4,8 @@ import Menubar from '../sections/Menubar.js';
 
 //could change this display in the future
 const mapContainerStyle = {
-  height: '650px',
-  width: '90%',
+  height: '600px',
+  width: '85%',
 };
 
 //could change center to atlanta for default in the future (not done yet)
@@ -49,7 +49,7 @@ const MapComponent = ({ title }) => {
     const request = {
       location: center,
       radius: '5000',
-      type: ['charging_station'],
+      type: ['electric_vehicle_charging_station'],
     };
 
     service.nearbySearch(request, (results, status) => {
@@ -124,7 +124,7 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
                 fontSize: '16px',
                 cursor: 'pointer',
             }}>
-                Locate Me
+                Use my location
             </button>
             </div>
 
