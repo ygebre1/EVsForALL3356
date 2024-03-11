@@ -6,6 +6,8 @@ import Charging from './pages/Charging.js';
 import ScrollToTop from './functions/ScrollToTop.js';
 
 function App() {
+  // We should find a better way of giving the user a customized homepage experience rather than creating another hompage (e.g./Homepage) and calling it the logged in user page.
+  // Consider conditional rendering based on whether user is logged in.
   return (
       <div>
         <BrowserRouter>
@@ -15,7 +17,6 @@ function App() {
             <Route path="/Homepage" element={<LandingPage />} />
             <Route path="/FindCars" element={<Buy />} />
             <Route path="/stations" element={<Charging />} />
-            {/* Other routes */}
           </Routes>
         </BrowserRouter>
       </div>
