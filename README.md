@@ -5,6 +5,25 @@ EV's For All is a one stop shop for everything related to Electric Cars. The pri
 
 # Release Notes
 ----------------------------------------
+## Version 0.3.0
+
+### Features
+- Maps Integration: Added Maps Integration to find charging station, when a user enters in their location they can see what charging locations are near them through red pins that appear on map
+- Locate me button: A locate me button was added so that the user has the option of sharing their location so that they don't need to type out anything.
+- Place Description: Added a mini description for each location that appears on the map when hovered over
+- Directions link: Included a link that routes user to a new tab or browser so they can get directions to a charging station of choice
+
+### Bug Fixes
+- Fixed a bug related to the filtering mechanism where the filter couldn't filter by price due to the our cars api not returning it
+- Fixed bug related to Home page, where the screen would break on small screens.
+- Addressed an issue related navbar appearing larger that it should on some pages
+
+### Known Issues
+- Filtering: There are some issues when filtering vehicles. Specifically when filtering by brand. This should easily be fixed in next iteration
+- UI Fixes: A lot of UI polishes have to be made, specifically related to different viewports. Find Cars page breaks on mobile screens still. This has to be addressed.
+- Prices: Prices for vehicles were tempory removed due to issues with API from Department of Renewable Energy
+- User Feedback: A lot of potential users who have seen the design have suggested that we include more images of budget friendly EV vehicles on the landing page. This one issue that we intend to address in the next iteration.
+
 ## Version 0.2.0
 
 ### Features
