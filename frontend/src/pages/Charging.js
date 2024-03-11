@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';
 import Menubar from '../sections/Menubar.js';
 
+//could change this display in the future
 const mapContainerStyle = {
   height: '650px',
   width: '90%',
 };
 
+//could change center to atlanta for default in the future (not done yet)
 const center = {
   lat: -34.397,
   lng: 150.644,
