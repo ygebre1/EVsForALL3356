@@ -54,7 +54,7 @@ export default function Dropdown(props) {
                             id="Audi"
                             className = "filterInput marginRight5"
                             name='audi'
-                            value={props.filter.audi}
+                            checked={props.filter.audi}
                             onChange={props.handleChange}
                         />
                         <label htmlFor='Audi'>Audi</label>
@@ -65,24 +65,33 @@ export default function Dropdown(props) {
                             id="BMW"
                             className = "filterInput marginRight5"
                             name='bmw'
-                            value={props.filter.bmw}
+                            checked={props.filter.bmw}
                             onChange={props.handleChange}
                         />
                         <label htmlFor='BMW'>BMW</label>
                     </div>
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="Tesla"
-                            className = "filterInput marginRight5"
-                            name='tesla'
-                            value={props.filter.tesla}
-                            onChange={props.handleChange}
-                        />
-                        <label htmlFor='Tesla'>Tesla</label>
-                    </div>
                 </div>
-                <h3 className = "divMarg">Year</h3>
+                <h3 className='divMarg'>Electric Range</h3>
+                <div className = "priceFlex">
+                    <input
+                        type="number"
+                        placeholder='min price'
+                        className = "filterInput"
+                        name='low_range'
+                        value={props.filter.low_range}
+                        onChange={props.handleChange}
+                    />
+                    <p className = "filterpara">to</p>
+                    <input
+                        type="number"
+                        placeholder='max price'
+                        className = "filterInput"
+                        name='high_range'
+                        value={props.filter.high_range}
+                        onChange={props.handleChange}
+                    />
+                </div>
+                {/* <h3 className = "divMarg">Year</h3>
                 <div className = "flexboxx">
                     <div className = "priceFlex">
                         <input
@@ -116,7 +125,7 @@ export default function Dropdown(props) {
                         />
                         <label htmlFor='2023'>2023</label>
                     </div>
-                </div>
+                </div> */}
             </form>
         </div>
     );

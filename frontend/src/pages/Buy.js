@@ -73,21 +73,20 @@ const Buy = () => {
   const [filter, setFilter] = useState({
     min: 0,
     max: 140000,
-    audi: undefined,
-    bmw: undefined,
-    tesla: undefined,
+    audi: true,
+    bmw: true,
+    low_range: 0,
+    high_range: 500,
     year: undefined
   })
 
   function handleFilterChange(e) {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
-  
     setFilter(prev => ({
       ...prev,
       [name]: newValue
     }));
-    console.log(filter);
   }  
 
   function handleSubmit(e) {
@@ -141,18 +140,48 @@ const Buy = () => {
           car.seating_capacity !== ""
         ).map((car, index) => {
           if (randomPrices[index] <= filter.max && randomPrices[index] >= filter.min) {
-            return(
-              <div key={car.id} className="car-item">
-                <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
-                <p>{car.manufacturer_name} {car.model}</p>
-                <p>Year: {car.model_year}</p>
-                <p>Electric Range: {car.electric_range} miles</p>
-                <p>Fuel Type: {car.fuel_name}</p>
-                <p>Drivetrain: {car.drivetrain}</p>
-                <p>Seating Capacity: {car.seating_capacity}</p>
-                <p>Price: ${randomPrices[index]}</p>
-              </div>
-            );
+            if (car.electric_range >= filter.low_range && car.electric_range <= filter.high_range) {
+              if (filter.audi && filter.bmw) {
+                return(
+                  <div key={car.id} className="car-item">
+                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
+                    <p>{car.manufacturer_name} {car.model}</p>
+                    <p>Year: {car.model_year}</p>
+                    <p>Electric Range: {car.electric_range} miles</p>
+                    <p>Fuel Type: {car.fuel_name}</p>
+                    <p>Drivetrain: {car.drivetrain}</p>
+                    <p>Seating Capacity: {car.seating_capacity}</p>
+                    <p>Price: ${randomPrices[index]}</p>
+                  </div>
+                );
+              } else if ((filter.audi && car.manufacturer_name === 'Audi') && !filter.bmw) {
+                return(
+                  <div key={car.id} className="car-item">
+                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
+                    <p>{car.manufacturer_name} {car.model}</p>
+                    <p>Year: {car.model_year}</p>
+                    <p>Electric Range: {car.electric_range} miles</p>
+                    <p>Fuel Type: {car.fuel_name}</p>
+                    <p>Drivetrain: {car.drivetrain}</p>
+                    <p>Seating Capacity: {car.seating_capacity}</p>
+                    <p>Price: ${randomPrices[index]}</p>
+                  </div>
+                );
+              } else if ((filter.bmw && car.manufacturer_name === 'BMW') && !filter.audi) {
+                return(
+                  <div key={car.id} className="car-item">
+                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
+                    <p>{car.manufacturer_name} {car.model}</p>
+                    <p>Year: {car.model_year}</p>
+                    <p>Electric Range: {car.electric_range} miles</p>
+                    <p>Fuel Type: {car.fuel_name}</p>
+                    <p>Drivetrain: {car.drivetrain}</p>
+                    <p>Seating Capacity: {car.seating_capacity}</p>
+                    <p>Price: ${randomPrices[index]}</p>
+                  </div>
+                );
+              }
+            }
           } else {
             return null
           }
