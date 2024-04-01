@@ -16,3 +16,21 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.load-more-cars {
+  background-color: #27ae60; /* Matching the buy-now button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto; /* Centers the button */
+  font-size: 1em; /* Adjust the size as necessary */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.load-more-cars:hover {
+  background-color: #218c4a; /* Darker shade on hover for better interaction feedback */
+}
+

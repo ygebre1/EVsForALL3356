@@ -159,6 +159,7 @@ const Buy = () => {
           
         })}
       </div>
+      <button className="load-more-cars">Load More Cars</button>
     </div>
   );
 };
