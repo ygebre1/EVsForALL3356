@@ -112,20 +112,29 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
                 }}
                 />
             </StandaloneSearchBox>
-            <button onClick={locate} style={{
-                boxSizing: 'border-box',
-                border: '1px solid #ccc',
-                backgroundColor: '#fff',
-                width: 'fit-content',
-                height: '40px',
-                padding: '8px 12px',
-                borderRadius: '5px',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
-                fontSize: '16px',
-                cursor: 'pointer',
-            }}>
-                Use my location
-            </button>
+            <button 
+  onClick={locate} 
+  style={{
+    boxSizing: 'border-box',
+    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+    width: 'fit-content', // Adjust width dynamically
+    minWidth: '120px', // Minimum width to prevent too narrow button
+    height: '40px',
+    padding: '8px 12px',
+    borderRadius: '5px',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+    fontSize: '16px',
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    '@media (max-width: 600px)': { /* Adjust the width based on your preference */
+      width: '100%', /* Set width to 100% on smaller screens */
+    }
+  }}>
+  Use my location
+  </button>
             </div>
 
           <GoogleMap mapContainerStyle={mapContainerStyle} center={mapCenter} zoom={10} onLoad={onMapLoad}>
