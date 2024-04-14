@@ -15,6 +15,7 @@ export default function Homepage() {
                     </p>
                     <p>Finding the perfect EV for your needs is made simple through our intuitive interface. Whether you're a seasoned EV enthusiast or new to the concept, our platform caters to your needs. </p>
                     <p>Embracing electric mobility has never been easier, thanks to EV's For All. We're committed to breaking down barriers and fostering a transition to sustainable transportation for everyone. </p>
+                    <p>No matter where you come from or what your level of familiarity with EVs is, our platform equips you with the tools and resources you need to embrace the future of mobility confidently. </p>
                 </div>
             </div>
             
