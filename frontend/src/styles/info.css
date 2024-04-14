@@ -1,0 +1,55 @@
+.info-background-image {
+    height: auto; /* This will maintain the aspect ratio of the image */
+    max-height: 160vh; /* This limits the height to 50% of the viewport height */
+    width: 100%; /* This will make sure it fills the width of its container */
+  }
+
+
+  h2 {
+    text-align: center; /* Center the header tags */
+    padding-bottom: 20px; /* Add padding from the bottom */
+  }
+  
+  
+
+  .overlay-content {
+    position: absolute;
+    top: 35%; /* Adjust the percentage to position the content closer to the top */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+  }
+  
+  
+  .overlay-title {
+    font-size: 2rem; /* Adjust size as needed */
+    font-weight: bold; /* Make the title bolder */
+    font-family: 'Arial', sans-serif; /* You can also use a different sans-serif font */
+  }
+  
+  
+  /* Add responsive design as needed */
+  @media (max-width: 768px) {
+    .overlay-title {
+      font-size: 1.5rem;
+    }
+  
+    .overlay-text {
+      font-size: 1rem;
+    }
+  
+    .overlay-subtext {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .separator {
+    border: none; /* Make the horizontal rule invisible */
+    margin: 30px 0; /* Add margin for separation */
+  }
+  
+  .accordion-card {
+    margin-bottom: 20px; /* Add padding between cards */
+  }
+  
