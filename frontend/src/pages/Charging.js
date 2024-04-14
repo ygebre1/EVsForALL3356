@@ -134,7 +134,7 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
     }
   }}>
   Use my location
-</button>
+  </button>
             </div>
 
           <GoogleMap mapContainerStyle={mapContainerStyle} center={mapCenter} zoom={10} onLoad={onMapLoad}>
