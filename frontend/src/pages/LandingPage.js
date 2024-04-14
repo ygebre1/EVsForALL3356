@@ -1,13 +1,13 @@
 import React from 'react';
 import Menubar from '../sections/Menubar.js';
-import NissanLeaf from '../images/nissanLeaf.jpg';
+import EnvBenefits from '../images/envbenefits.png'; // Importing envbenefits.png
 
 export default function Homepage() {
     return (
         <div>
             <Menubar />
             <div id = "homeInfo">
-                <img id="nissanLeaf" src={NissanLeaf} alt="The Future of EVs: Nissan Leaf"/> {/* Replaced Tesla with Nissan Leaf */}
+            <img id="envBenefits" src={EnvBenefits} alt="Environmental Benefits of EVs"/> {/* Replaced NissanLeaf with EnvBenefits */}
                 <div id = "textinfo">
                 <h2 id="trustedCar">Welcome to EV's For All<br/>Driving Inclusivity in Electric Mobility</h2>
                     <h1 id = "fastSearch">Your Journey Starts Here: Discover, Charge, Drive </h1>
