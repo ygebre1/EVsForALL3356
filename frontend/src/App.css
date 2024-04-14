@@ -24,9 +24,11 @@
 }
 
 #trustedCar {
-  font-weight: 400;
+  font-weight: bold; /* Impact is naturally bold, but specifying ensures consistency */
+  font-family: 'Impact', sans-serif; /* Fallback to generic sans-serif if Impact is not available */
   color: rgb(38, 84, 237);
 }
+
 
 #fastSearch {
   font-weight: 500;
