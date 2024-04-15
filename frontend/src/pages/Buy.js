@@ -43,6 +43,8 @@ const Buy = () => {
   // ]
 
   // Function to fetch cars from backend
+  const [filterBrands, setFilterBrands] = useState([])
+
   const fetchCars = async () => {
     try {
       const response = await fetch('http://localhost:8800/light-duty-automobiles');
@@ -51,10 +53,19 @@ const Buy = () => {
       console.log(data)
       // Assuming the backend returns an array of cars
       setCars(data);
+      getFilterBrands(data)
     } catch (error) {
       console.error('Error fetching cars:', error);
     }
   };
+
+  const getFilterBrands = (data) => {
+    const carManu = new Set()
+    data.forEach(car => {
+      carManu.add(car.manufacturer_name)
+    })
+    setFilterBrands(Array.from(carManu))
+  }
 
   // useEffect to call fetchCars on component mount
   useEffect(() => {
@@ -73,21 +84,30 @@ const Buy = () => {
   const [filter, setFilter] = useState({
     min: 0,
     max: 140000,
-    audi: true,
-    bmw: true,
     low_range: 0,
     high_range: 500,
     year: undefined
   })
 
   function handleFilterChange(e) {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
+    const { name, value } = e.target;
     setFilter(prev => ({
       ...prev,
-      [name]: newValue
+      [name]: value
     }));
-  }  
+  }
+
+  const [brandNames, setBrandNames] = useState([])
+
+  const handleBrands = (brand) => {
+    setBrandNames((alreadyIncluded) => {
+      if (alreadyIncluded.includes(brand)) {
+          return alreadyIncluded.filter(name => name !== brand);
+      } else {
+          return [...alreadyIncluded, brand];
+      }
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -120,8 +140,10 @@ const Buy = () => {
             dropdown="dropdown-content"
             buttonClass="dropbtn"
             buttonTrigger="Default (Filter by)"
+            brands={filterBrands}
             handleChange={handleFilterChange}
             handleSubmit={handleSubmit}
+            handleBrands={handleBrands}
             filter = {filter}
           />
         </div>
@@ -141,7 +163,7 @@ const Buy = () => {
         ).map((car, index) => {
           if (randomPrices[index] <= filter.max && randomPrices[index] >= filter.min) {
             if (car.electric_range >= filter.low_range && car.electric_range <= filter.high_range) {
-              if (filter.audi && filter.bmw) {
+              if (brandNames.length === 0) {
                 return(
                   <div key={car.id} className="car-item">
                     <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
@@ -154,20 +176,7 @@ const Buy = () => {
                     <p>Price: ${randomPrices[index]}</p>
                   </div>
                 );
-              } else if ((filter.audi && car.manufacturer_name === 'Audi') && !filter.bmw) {
-                return(
-                  <div key={car.id} className="car-item">
-                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
-                    <p>{car.manufacturer_name} {car.model}</p>
-                    <p>Year: {car.model_year}</p>
-                    <p>Electric Range: {car.electric_range} miles</p>
-                    <p>Fuel Type: {car.fuel_name}</p>
-                    <p>Drivetrain: {car.drivetrain}</p>
-                    <p>Seating Capacity: {car.seating_capacity}</p>
-                    <p>Price: ${randomPrices[index]}</p>
-                  </div>
-                );
-              } else if ((filter.bmw && car.manufacturer_name === 'BMW') && !filter.audi) {
+              } else if (brandNames.includes(car.manufacturer_name)) {
                 return(
                   <div key={car.id} className="car-item">
                     <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
@@ -185,7 +194,6 @@ const Buy = () => {
           } else {
             return null
           }
-          
         })}
       </div>
       <button className="load-more-cars">Load More Cars</button>

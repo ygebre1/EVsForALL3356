@@ -47,30 +47,22 @@ export default function Dropdown(props) {
                     />
                 </div>
                 <h3 className = "divMarg">Make</h3>
-                <div className = "flexboxx">
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="Audi"
-                            className = "filterInput marginRight5"
-                            name='audi'
-                            checked={props.filter.audi}
-                            onChange={props.handleChange}
-                        />
-                        <label htmlFor='Audi'>Audi</label>
+                {props.brands && (
+                    <div className = "flexboxx">
+                        {props.brands.map((bName, index) => (
+                            <div className='priceFlex' key={index}>
+                                <input
+                                    type="checkbox"
+                                    id={bName}
+                                    className = "filterInput marginRight5"
+                                    name={bName}
+                                    onChange={() => props.handleBrands(bName)}
+                                />
+                                <label htmlFor={bName}>{bName}</label>
+                            </div>
+                        ))}
                     </div>
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="BMW"
-                            className = "filterInput marginRight5"
-                            name='bmw'
-                            checked={props.filter.bmw}
-                            onChange={props.handleChange}
-                        />
-                        <label htmlFor='BMW'>BMW</label>
-                    </div>
-                </div>
+                )}
                 <h3 className='divMarg'>Electric Range</h3>
                 <div className = "priceFlex">
                     <input
@@ -91,41 +83,6 @@ export default function Dropdown(props) {
                         onChange={props.handleChange}
                     />
                 </div>
-                {/* <h3 className = "divMarg">Year</h3>
-                <div className = "flexboxx">
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="2020"
-                            className = "filterInput marginRight5"
-                        />
-                        <label htmlFor='2020'>2020</label>
-                    </div>
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="2021"
-                            className = "filterInput marginRight5"
-                        />
-                        <label htmlFor='2021'>2021</label>
-                    </div>
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="2022"
-                            className = "filterInput marginRight5"
-                        />
-                        <label htmlFor='2022'>2022</label>
-                    </div>
-                    <div className = "priceFlex">
-                        <input
-                            type="checkbox"
-                            id="2023"
-                            className = "filterInput marginRight5"
-                        />
-                        <label htmlFor='2023'>2023</label>
-                    </div>
-                </div> */}
             </form>
         </div>
     );
