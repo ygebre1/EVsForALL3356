@@ -116,7 +116,7 @@ const Buy = () => {
   const randomPrices = useMemo(() => {
     const prices = [];
     for (let i = 0; i < cars.length; i++) {
-      prices.push(Randomizer({ base_num: 40000, range: 100000 }));
+      prices.push(Randomizer({ base_num: 20000, range: 60000 }));
     }
     return prices;
   }, [cars]); // Recalculate prices whenever cars change
