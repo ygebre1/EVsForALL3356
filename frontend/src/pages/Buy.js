@@ -81,6 +81,7 @@ const Buy = () => {
     { title: 'Alphabetically (A-Z)' }
   ];
 
+  // contains the filter criteria
   const [filter, setFilter] = useState({
     min: 0,
     max: 140000,
@@ -89,6 +90,7 @@ const Buy = () => {
     year: undefined
   })
 
+  // handles state chanes in filter
   function handleFilterChange(e) {
     const { name, value } = e.target;
     setFilter(prev => ({
@@ -97,6 +99,7 @@ const Buy = () => {
     }));
   }
 
+  // contains the brand names to be included for filtering
   const [brandNames, setBrandNames] = useState([])
 
   const handleBrands = (brand) => {
