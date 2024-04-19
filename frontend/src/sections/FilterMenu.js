@@ -3,7 +3,7 @@ import '../styles/FilterMenu.css'
 
 export default function Dropdown(props) {
     const [activate, setActivate] = useState(false);
-
+    // makes sure that when someone clicks outside of the filter menu dropdown box it closes
     useEffect(() => {
         function handleClickOutside(event) {
             if (!event.target.closest('.dropdown') && activate) {
