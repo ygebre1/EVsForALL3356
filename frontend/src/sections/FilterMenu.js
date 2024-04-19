@@ -20,6 +20,7 @@ export default function Dropdown(props) {
         setActivate(prevActivate => !prevActivate);
     }
 
+    // will be mapping the brands in props so that at any given moment all brands of cars displayed are selectable for filtration
     return (
         <div className="dropdown">
             <button onClick={dropActivate} className={`${activate ? `${props.buttonClass} white` : props.buttonClass}`}>
