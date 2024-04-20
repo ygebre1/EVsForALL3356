@@ -23,7 +23,7 @@ function Menubar() {
               <a className="nav-link active" href="/stations">Find Charging Stations</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="\" tabIndex="-1" aria-disabled="true">Information</a>
+              <a className="nav-link active" href="/info" tabIndex="-1" aria-disabled="true">Information</a>
             </li>
           </ul>
         </div>
