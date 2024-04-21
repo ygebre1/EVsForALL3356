@@ -26,7 +26,7 @@
 #trustedCar {
   font-weight: bold; /* Impact is naturally bold, but specifying ensures consistency */
   font-family: 'Impact', sans-serif; /* Fallback to generic sans-serif if Impact is not available */
-  color: rgb(38, 84, 237);
+  color: rgb(38, 84, 237); /* Gives it a color that matches with the theme */
 }
 
 
