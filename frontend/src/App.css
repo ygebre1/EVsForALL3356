@@ -9,6 +9,10 @@
   color: rgb(20, 175, 20);
 }
 
+.homeInfo{
+  width: 100%;
+}
+
 #navbuttons {
   display: flex;
   flex-direction: column;
@@ -23,12 +27,6 @@
   justify-content: center;
 }
 
-#trustedCar {
-  font-weight: bold; /* Impact is naturally bold, but specifying ensures consistency */
-  font-family: 'Impact', sans-serif; /* Fallback to generic sans-serif if Impact is not available */
-  color: rgb(38, 84, 237);
-}
-
 
 #fastSearch {
   font-weight: 500;
@@ -41,12 +39,6 @@
   align-items: center;
 }
 
-#parainfo {
-  font-size: 16px;
-  color: rgb(59, 59, 59);
-  line-height: 24px;
-  margin-bottom: 30px;
-}
 
 #textinfo {
   padding: 20px;
@@ -55,45 +47,4 @@
   max-width: 800px; /* Adjust the maximum width as needed */
 }
 
-#nissanLeaf {
-  width: 100%;
-  height: auto;
-  margin: 0; /* Remove margins */
 
-}
-
-
-.buttonLink {
-  display: block;
-  padding: 15px 20px;
-  background-color: black;
-  margin: 20px 0;
-  border-radius: 10px;
-}
-
-.buttonText {
-  display: block;
-  text-decoration: none;
-  color: white;
-  text-align: center;
-  font-size: 16px;
-}
-
-/* Media queries for responsive design */
-
-@media only screen and (min-width: 600px) {
-  .navlinks {
-    padding: 10px 30px;
-    font-size: 20px;
-  }
-
-  #nissanLeaf {
-    max-width: 100%;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #textinfo {
-    padding: 20px 50px;
-  }
-}
