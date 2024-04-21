@@ -3,6 +3,7 @@ import Menubar from '../sections/Menubar.js';
 import { Container, Row, Col, ListGroup, List, ListGroupItem, Card,CardHeader, CardImg, CardImgOverlay,CardTitle, CardBody } from 'reactstrap';
 import '../styles/info.css'; // Import custom CSS for styling
 import infopageimage from '../images/infopage.png';
+import Footer from '../sections/Footer.js';
 
 function EVInfoPage() {
   return (
@@ -73,13 +74,13 @@ function EVInfoPage() {
 
         <hr className="separator" />
         <h2>Sources</h2> {/* Header for the sources section */}
-        <List type='unstyled'>
-          <li>Popular Science</li>
-          <li>Alternative Fuels Data Center</li>
-          <li>ACEEE</li>
-          <li>Vital Signs</li>
-        </List>
+        <List type='inline' className="sources-list">
+    <li><a href="https://www.popsci.com/search/EV+cars/">Popular Science</a></li>
+    <li><a href="https://afdc.energy.gov/">Alternative Fuels Data Center</a></li>
+    <li><a href="https://www.aceee.org/search/site?keys=EV+cars">ACEEE</a></li>
+  </List>
       </Container>
+      <Footer />
     </div>
   );
 }
