@@ -52,4 +52,14 @@
   .accordion-card {
     margin-bottom: 20px; /* Add padding between cards */
   }
+
+  /* Add this to your existing info.css file */
+.sources-list {
+  text-align: center; /* Center-align the list items */
+}
+
+.list-group-item {
+  background-color: black;
+  color: white;
+}
   
