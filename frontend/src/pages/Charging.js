@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';
 import Menubar from '../sections/Menubar.js';
+import Footer from '../sections/Footer.js';
 
 //could change this display in the future
 const mapContainerStyle = {
@@ -176,6 +177,7 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
           </GoogleMap>
         </LoadScript>
       </div>
+      <Footer />
     </div>
   );
 };
