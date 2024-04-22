@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Accordion } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure to import Bootstrap CSS
 
+// Car component to display car details
 const Car = ({ car, price }) => {
     return (
         <Card className="mb-3" style={{ width: '18rem' }}>
