@@ -7,6 +7,8 @@ import FindCarsandStationsimg from '../images/landingpageimg.png';
 import LearnmoreImage from '../images/envbenefits.png';
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 
+import Footer from '../sections/Footer.js';
+
 export default function Homepage() {
     // Define carousel items
         const items = [
@@ -130,6 +132,7 @@ export default function Homepage() {
                     ))}
                 </Row>
             </Container>
+            <Footer />
         </div>
     );
 }

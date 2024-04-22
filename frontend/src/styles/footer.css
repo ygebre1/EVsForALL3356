@@ -1,0 +1,26 @@
+/* Footer.css */
+.footer-container {
+    padding: 10px; /* Decrease padding */
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-icons img {
+    width: 20px; /* Decrease image width */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 5px; /* Adjust margin */
+  }
+  
+  .footer-text {
+    color: white;
+    padding: 5px; /* Decrease padding */
+    font-size: 12px; /* Decrease font size */
+  }
+  
+  .social-icon {
+    margin-right: 5px; /* Adjust margin between icons */
+  }
+  

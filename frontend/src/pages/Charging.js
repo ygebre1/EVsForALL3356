@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';
 import Menubar from '../sections/Menubar.js';
+import Footer from '../sections/Footer.js';
 
 //could change this display in the future
 const mapContainerStyle = {
@@ -10,8 +11,8 @@ const mapContainerStyle = {
 
 //could change center to atlanta for default in the future (not done yet)
 const center = {
-  lat: -34.397,
-  lng: 150.644,
+  lat: 33.7488,
+  lng: -84.3877,
 };
 
 const libraries = ['places'];
@@ -176,6 +177,7 @@ when doing npm start to use API KEY, this way noboby accidently pushes the key i
           </GoogleMap>
         </LoadScript>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import '../styles/Car.css';
 import Dropdown from '../sections/SortMenu.js';
 import Filter from '../sections/FilterMenu.js';
 import Randomizer from '../functions/Randomizer.js';
+import Car from './Car';
 
 const Buy = () => {
 
@@ -13,6 +14,8 @@ const Buy = () => {
 
   // State to store fetched cars
   const [cars, setCars] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const limit = 30;
 
   //cars variable format: an array of car objects:
 
@@ -47,15 +50,16 @@ const Buy = () => {
 
   const fetchCars = async () => {
     try {
-      const response = await fetch('http://localhost:8800/light-duty-automobiles');
-      if (!response.ok) throw new Error('Failed to fetch');
-      const data = await response.json();
-      console.log(data)
-      // Assuming the backend returns an array of cars
-      setCars(data);
-      getFilterBrands(data)
+        const response = await fetch(`http://localhost:8800/light-duty-automobiles?limit=${limit}&offset=${offset}`);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const newCars = await response.json();
+        if (newCars.length > 0) {
+            setCars(prevCars => [...prevCars, ...newCars]); // Append new cars to existing list
+            setOffset(prevOffset => prevOffset + limit); // Increase offset
+            
+        }
     } catch (error) {
-      console.error('Error fetching cars:', error);
+        console.error('Error fetching cars:', error);
     }
   };
 
@@ -72,7 +76,9 @@ const Buy = () => {
     fetchCars();
   }, []);
 
-
+  const loadMoreCars = () => {
+    fetchCars(); // Fetch more cars on button click
+  };
 
   const sortMenuItems = [
     { title: 'Default (Sort by)' },
@@ -153,53 +159,27 @@ const Buy = () => {
       </div>
 
       <div className="buy-page">
-        {/* Filters out cars with missing values */}
         {cars.filter(car =>
-          car.manufacturer_name != null &&
-          car.model != null &&
-          car.model_year != null &&
-          car.photo_url !== "" &&
-          car.electric_range !== "" &&
-          car.fuel_name != null &&
-          car.drivetrain != null &&
-          car.seating_capacity !== ""
+            car.manufacturer_name != null &&
+            car.model != null &&
+            car.model_year != null &&
+            car.photo_url !== "" &&
+            car.electric_range !== "" &&
+            car.fuel_name != null &&
+            car.drivetrain != null &&
+            car.seating_capacity !== ""
         ).map((car, index) => {
-          if (randomPrices[index] <= filter.max && randomPrices[index] >= filter.min) {
-            if (car.electric_range >= filter.low_range && car.electric_range <= filter.high_range) {
-              if (brandNames.length === 0) {
-                return(
-                  <div key={car.id} className="car-item">
-                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
-                    <p>{car.manufacturer_name} {car.model}</p>
-                    <p>Year: {car.model_year}</p>
-                    <p>Electric Range: {car.electric_range} miles</p>
-                    <p>Fuel Type: {car.fuel_name}</p>
-                    <p>Drivetrain: {car.drivetrain}</p>
-                    <p>Seating Capacity: {car.seating_capacity}</p>
-                    <p>Price: ${randomPrices[index]}</p>
-                  </div>
-                );
-              } else if (brandNames.includes(car.manufacturer_name)) {
-                return(
-                  <div key={car.id} className="car-item">
-                    <img src={car.photo_url} alt={`${car.manufacturer_name} ${car.model}`} />
-                    <p>{car.manufacturer_name} {car.model}</p>
-                    <p>Year: {car.model_year}</p>
-                    <p>Electric Range: {car.electric_range} miles</p>
-                    <p>Fuel Type: {car.fuel_name}</p>
-                    <p>Drivetrain: {car.drivetrain}</p>
-                    <p>Seating Capacity: {car.seating_capacity}</p>
-                    <p>Price: ${randomPrices[index]}</p>
-                  </div>
-                );
-              }
+            if (randomPrices[index] <= filter.max && randomPrices[index] >= filter.min) {
+                if (car.electric_range >= filter.low_range && car.electric_range <= filter.high_range) {
+                    return <Car key={car.id} car={car} price={randomPrices[index]} />;
+                }
             }
-          } else {
-            return null
-          }
+            return null;
         })}
-      </div>
-      <button className="load-more-cars">Load More Cars</button>
+        <button className="load-more-cars" onClick={loadMoreCars}>Load More Cars</button>
+    </div>
+
+      
     </div>
   );
 };
