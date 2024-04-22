@@ -9,7 +9,8 @@ const mapContainerStyle = {
   width: '85%',
 };
 
-//could change center to atlanta for default in the future (not done yet)
+// This part is currently set to Atlanta as the default location for the 
+// Google Maps API
 const center = {
   lat: 33.7488,
   lng: -84.3877,
