@@ -39,6 +39,13 @@
   align-items: center;
 }
 
+#parainfo {
+  font-size: 16px; /* Sets the font size to 16px for readability. */
+  color: rgb(59, 59, 59); /* Gives it a color that matches with the theme */
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
 
 #textinfo {
   padding: 20px;
