@@ -64,10 +64,15 @@ h3 {
 .marginRight5 {
     margin-right: 15px;
 }
+.margin-top-10 {
+    margin-top: 10px !important;
+}
 .flexboxx {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 .divMarg {
     margin-top: 30px;
+    margin-bottom: 20px;
 }

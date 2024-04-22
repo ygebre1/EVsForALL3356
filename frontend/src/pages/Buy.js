@@ -16,6 +16,15 @@ const Buy = () => {
   const [cars, setCars] = useState([]);
   const [offset, setOffset] = useState(0);
   const limit = 30;
+  const [filterBrands, setFilterBrands] = useState([]);
+  const [filter, setFilter] = useState({
+    min: 0,
+    max: 140000,
+    low_range: 0,
+    high_range: 500,
+    year: undefined
+  });
+  const [brandNames, setBrandNames] = useState([]);
 
   //cars variable format: an array of car objects:
 
@@ -46,15 +55,25 @@ const Buy = () => {
   // ]
 
   // Function to fetch cars from backend
-  const [filterBrands, setFilterBrands] = useState([])
 
   const fetchCars = async () => {
     try {
         const response = await fetch(`http://localhost:8800/light-duty-automobiles?limit=${limit}&offset=${offset}`);
         if (!response.ok) throw new Error('Failed to fetch');
         const newCars = await response.json();
-        if (newCars.length > 0) {
-            setCars(prevCars => [...prevCars, ...newCars]); // Append new cars to existing list
+        const filteredCars = newCars.filter(car => 
+          car.manufacturer_name != null &&
+          car.model != null &&
+          car.model_year != null &&
+          car.photo_url !== "" &&
+          car.electric_range !== "" &&
+          car.fuel_name != null &&
+          car.drivetrain != null &&
+          car.seating_capacity !== ""
+        );
+        getFilterBrands(filteredCars)
+        if (filteredCars.length > 0) {
+            setCars(prevCars => [...prevCars, ...filteredCars]); // Append new cars to existing list
             setOffset(prevOffset => prevOffset + limit); // Increase offset
             
         }
@@ -64,17 +83,58 @@ const Buy = () => {
   };
 
   const getFilterBrands = (data) => {
-    const carManu = new Set()
-    data.forEach(car => {
-      carManu.add(car.manufacturer_name)
-    })
-    setFilterBrands(Array.from(carManu))
+    if (data.length !== 0) {
+      const brandSet = new Set(filterBrands);  // Create a set from the current state
+      let changed = false;  // This flag will track whether we added new brands
+      data.forEach(car => {
+        if (car !== null && !brandSet.has(car.manufacturer_name)) {
+          brandSet.add(car.manufacturer_name);
+          changed = true;  // Set the flag to true as we've added a new brand
+        }
+      });
+      if (changed) {
+        setFilterBrands(Array.from(brandSet));
+      }
+    }
   }
+  
 
   // useEffect to call fetchCars on component mount
   useEffect(() => {
     fetchCars();
   }, []);
+
+  const fetchCarsBrands = async () => {
+    try {
+        const response = await fetch(`http://localhost:8800/light-duty-automobiles?limit=${cars.length}&offset=${0}`);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const newCars = await response.json();
+        const filteredCars = newCars.filter(car => 
+          car.manufacturer_name != null &&
+          car.model != null &&
+          car.model_year != null &&
+          car.photo_url !== "" &&
+          car.electric_range !== "" &&
+          car.fuel_name != null &&
+          car.drivetrain != null &&
+          car.seating_capacity !== ""
+        );
+        if (filteredCars.length > 0) {
+            setCars(filteredCars);
+        }
+    } catch (error) {
+        console.error('Error fetching cars:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCarsBrands()
+    console.log(brandNames)
+  }, [brandNames])
+
+  useEffect(() => {
+    console.log(cars.length)
+  }, [cars.length])
 
   const loadMoreCars = () => {
     fetchCars(); // Fetch more cars on button click
@@ -87,15 +147,6 @@ const Buy = () => {
     { title: 'Alphabetically (A-Z)' }
   ];
 
-  // contains the filter criteria
-  const [filter, setFilter] = useState({
-    min: 0,
-    max: 140000,
-    low_range: 0,
-    high_range: 500,
-    year: undefined
-  })
-
   // handles state chanes in filter
   function handleFilterChange(e) {
     const { name, value } = e.target;
@@ -106,7 +157,6 @@ const Buy = () => {
   }
 
   // contains the brand names to be included for filtering
-  const [brandNames, setBrandNames] = useState([])
 
   const handleBrands = (brand) => {
     setBrandNames((alreadyIncluded) => {
@@ -159,19 +209,12 @@ const Buy = () => {
       </div>
 
       <div className="buy-page">
-        {cars.filter(car =>
-            car.manufacturer_name != null &&
-            car.model != null &&
-            car.model_year != null &&
-            car.photo_url !== "" &&
-            car.electric_range !== "" &&
-            car.fuel_name != null &&
-            car.drivetrain != null &&
-            car.seating_capacity !== ""
-        ).map((car, index) => {
+        {cars.map((car, index) => {
             if (randomPrices[index] <= filter.max && randomPrices[index] >= filter.min) {
                 if (car.electric_range >= filter.low_range && car.electric_range <= filter.high_range) {
+                  if (brandNames.length === 0 || brandNames.includes(car.manufacturer_name)) {
                     return <Car key={car.id} car={car} price={randomPrices[index]} />;
+                  }
                 }
             }
             return null;
