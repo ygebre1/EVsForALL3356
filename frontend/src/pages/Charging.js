@@ -11,8 +11,8 @@ const mapContainerStyle = {
 
 //could change center to atlanta for default in the future (not done yet)
 const center = {
-  lat: -34.397,
-  lng: 150.644,
+  lat: 33.7488,
+  lng: -84.3877,
 };
 
 const libraries = ['places'];
