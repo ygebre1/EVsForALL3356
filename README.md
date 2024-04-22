@@ -5,6 +5,23 @@ EV's For All is a one stop shop for everything related to Electric Cars. The pri
 
 # Release Notes
 ----------------------------------------
+## Version 0.5.0
+
+### Features
+- Info page has been added including relevant information provided to by the Center of Sustainable Communities. A sources section was added that lets the users visit sites that were used in to compile the information in the info page. This lets users learn more if they are interested.
+- Major UI improvements for all pages. All components are now responsive and work for a mobile layout as well. We have also included a footer on the landing page and info page.
+
+### Bug Fixes
+- Screen breaking glitch: On Mobile screens the find cars page would general break and the website wouldn't render correctly, we have now fixed this so it doesn't occur.
+- A bug related to the filtering functionality of the last sprint was fixed
+- Fixed a minor issue with landing page where the home button wasn't navigating back to the homescreen/landing page.
+
+### Known Issues
+- The filtering functionality can be improved upon. Furthermore, it doesn't work properly when there are more than 9 vehicles rendered on the screen. This should be fixed.
+- Charging station locations: This would should be pulled down from an api and then fed into the maps api to give more accurate info. The maps API info on charging stations seems to a bit outdated and occasionally gives wrong locations. This link has a free api for this https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/.
+- Database Migration: Currently we are using sqlite for our database, but when the application is deployed something like MySQL or Postgres should be used instead. A migration needs to happen for this.
+- Load Balancing/Performance features: In the future Services that help with load balancing and distribute the network traffic should be used such as CDNS. Other Services that enable Low latency can also be used.
+
 ## Version 0.4.0
 
 ### Features
