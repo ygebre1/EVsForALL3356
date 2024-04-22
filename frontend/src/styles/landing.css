@@ -17,7 +17,7 @@
 }
 
 .about-card {
-    width: 80%;
+    width: 80%; /* Adjust width for the about card */
     margin: 20px auto; /* Adjust margin for the about card */
     padding: 20px; /* Add padding for the about card */
 }
