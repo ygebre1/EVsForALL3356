@@ -3,6 +3,76 @@
 ## About
 EV's For All is a one stop shop for everything related to Electric Cars. The primary goal of the application is close the gap present in EV adoption for under priveledged communities. We seek to encourage and empower our users, especially people from underpriveledged communities, to obtain EVs as well as educate them on the benefits of electric vehicles.
 
+## Installation Guide
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+- Node.js and npm (Node Package Manager): [Download and Install Node.js](https://nodejs.org/)
+- Git: [Download and Install Git](https://git-scm.com/)
+- SQLite: [Download and Install SQLite](https://www.sqlite.org/download.html)
+
+### Clone the Repository
+
+1. Open your terminal.
+2. Clone the repository using the following command:
+
+```bash
+git clone <repository-url>
+```
+Replace <project-directory> with the name of your project directory.
+
+### Install Dependencies
+
+1.Navigate to the project directory
+
+```bash
+cd <project-directory>
+```
+
+Replace <project-directory> with the name of your project directory.
+
+2. Install server-side dependencies:
+   ```bash
+   npm install
+3. Navigate to the client directory:
+   ```bash
+   cd client
+4. Install client-side dependencies:
+   ```bash
+   npm install
+### Start the Application
+1. In the root directory of the project, start the server:
+```bash
+npm start
+```
+2. In a separate terminal window, navigate to the client directory:
+```bash
+cd client
+```
+3. Start the React development server:
+   ```bash
+   npm start
+   
+### Access the Application
+Once the servers are running, you can access the application by opening a web browser and navigating to http://localhost:3000.
+
+### Troubleshooting
+#### Common Installation Issues:
+1. Dependency Installation Failures: If npm install fails, ensure that you have the latest version of npm and Node.js installed. You can update npm using npm install -g npm@latest.
+2. Permission Errors: If you encounter permission errors during installation, try running the installation commands with elevated privileges using sudo.
+3. Incorrect Environment Configuration: Double-check your .env file for any typos or incorrect configurations. Ensure that the PORT variable is not already in use by another application.
+#### Common Runtime Issues:
+1. Port Conflict: If you receive an error indicating that the port is already in use when starting the server, try changing the port number in the .env file to an available port.
+2. Database Connection Errors: If the application fails to connect to the SQLite database, verify that the DB_PATH variable in the .env file points to the correct location of the database file.
+3. Client-side Rendering Issues: If the React development server fails to start or if you encounter errors related to client-side rendering, ensure that all client-side dependencies are correctly installed and up to date.
+#### Additional Troubleshooting Tips:
+1. Clearing Cache: Sometimes, issues can be resolved by clearing the cache. Try running npm cache clean --force followed by reinstalling dependencies.
+2. Checking Logs: Check the server and client logs for any error messages or stack traces that might provide clues about the issue.
+3. Community Support: If you're unable to resolve an issue on your own, don't hesitate to reach out to the community for support. Forums, Stack Overflow, or relevant 4. documentation may provide solutions to common problems.
+
+  
+
 # Release Notes
 ----------------------------------------
 ## Version 0.5.0
