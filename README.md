@@ -42,13 +42,13 @@ Replace <project-directory> with the name of your project directory.
    ```bash
    npm install
 ### Start the Application
-1. In the root directory of the project, start the server:
+1. In the backend directory of the project, start the server:
 ```bash
-npm start
+node index.js
 ```
-2. In a separate terminal window, navigate to the client directory:
+2. In a separate terminal window, navigate to the frontend directory:
 ```bash
-cd client
+cd frontend
 ```
 3. Start the React development server:
    ```bash
